@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jagathiswaran - Portfolio</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;800&display=swap');
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background-color: #050505;
+            color: #ffffff;
+            overflow-x: hidden;
+        }
+        /* Loader screen styling */
+        #loader {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: #000000;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 50;
+            font-size: 5rem;
+            font-weight: 800;
+            letter-spacing: -2px;
+        }
+        /* Blinking name animation */
+        .blink-name {
+            animation: blinkEffect 1.5s infinite alternate;
+        }
+        @keyframes blinkEffect {
+            0% { opacity: 0.3; transform: scale(0.98); }
+            100% { opacity: 1; transform: scale(1); }
+        }
+        /* Sony Camera Wireframe Background Animation */
+        .sony-bg-anim {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 400px;
+            height: 400px;
+            border: 2px dashed rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            animation: rotateCamera 20s linear infinite;
+            pointer-events: none;
+            z-index: 0;
+        }
+        .sony-lens {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 220px;
+            height: 220px;
+            border: 3px solid rgba(255, 255, 255, 0.15);
+            border-radius: 50%;
+            animation: pulseLens 4s ease-in-out infinite alternate;
+        }
+        @keyframes rotateCamera {
+            0% { transform: translate(-50%, -50%) rotate(0deg); }
+            100% { transform: translate(-50%, -50%) rotate(360deg); }
+        }
+        @keyframes pulseLens {
+            0% { transform: translate(-50%, -50%) scale(0.95); opacity: 0.3; }
+            100% { transform: translate(-50%, -50%) scale(1.05); opacity: 0.7; }
+        }
+    </style>
+</head>
+<body class="bg-[#050505] text-white">
+
+    <!-- Loading Screen with Counter -->
+    <div id="loader">
+        <span id="counter">0</span>
+    </div>
+
+    <!-- Main Portfolio Content -->
+    <div id="main-content" class="opacity-0 transition-opacity duration-1000 relative">
+        
+        <!-- Header / Hero Section with Sony Camera Creative Animation Background -->
+        <section class="h-screen flex flex-col justify-center items-center text-center px-4 relative overflow-hidden">
+            <!-- Sony Camera Wireframe Animation Elements -->
+            <div class="sony-bg-anim">
+                <div class="sony-lens"></div>
+            </div>
+            
+            <div class="relative z-10">
+                <h1 class="text-5xl md:text-8xl font-extrabold tracking-wider uppercase blink-name mb-6">
+                    Jagathiswaran
+                </h1>
+                <p class="text-lg md:text-xl text-gray-400 font-light tracking-wide max-w-xl mx-auto mb-8">
+                    Professional Photographer & Designer crafting timeless visual experiences through the lens.
+                </p>
+                <a href="#contact" class="border border-white/30 px-8 py-3 rounded-full hover:bg-white hover:text-black transition duration-300 font-semibold tracking-wider text-sm uppercase">
+                    Let's Talk
+                </a>
+            </div>
+        </section>
+
+        <!-- About / Bio Section -->
+        <section class="py-20 px-6 md:px-20 max-w-5xl mx-auto border-t border-white/10 relative z-10">
+            <h2 class="text-xs uppercase tracking-widest text-gray-500 mb-6">// The Philosophy</h2>
+            <p class="text-2xl md:text-4xl font-light leading-relaxed text-gray-200">
+                "I believe great design is born at the intersection of visual precision and artistic intuition. Every frame captured is an opportunity to freeze moments into eternity."
+            </p>
+        </section>
+
+        <!-- Contact Section -->
+        <section id="contact" class="py-20 px-6 md:px-20 max-w-5xl mx-auto border-t border-white/10 relative z-10">
+            <h2 class="text-xs uppercase tracking-widest text-gray-500 mb-10">// Get in Touch</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div>
+                    <p class="text-gray-400 mb-2">Email Me At</p>
+                    <a href="mailto:jagathiswaran2862@gmail.com" class="text-xl md:text-2xl font-bold hover:text-gray-400 transition">
+                        jagathiswaran2862@gmail.com
+                    </a>
+                </div>
+                <div>
+                    <p class="text-gray-400 mb-2">Call / WhatsApp</p>
+                    <a href="tel:7806827589" class="text-xl md:text-2xl font-bold hover:text-gray-400 transition">
+                        +91 7806827589
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <footer class="text-center py-8 text-sm text-gray-600 border-t border-white/10 relative z-10">
+            &copy; 2026 Jagathiswaran. All rights reserved.
+        </footer>
+
+    </div>
+
+    <!-- JavaScript for Loading Animation -->
+    <script>
+        let counterElement = document.getElementById('counter');
+        let loader = document.getElementById('loader');
+        let mainContent = document.getElementById('main-content');
+        
+        let count = 0;
+        let interval = setInterval(() => {
+            count += Math.floor(Math.random() * 8) + 3; 
+            if (count >= 100) {
+                count = 100;
+                clearInterval(interval);
+                loader.style.transition = "opacity 0.6s ease";
+                loader.style.opacity = "0";
+                setTimeout(() => {
+                    loader.style.display = "none";
+                    mainContent.classList.remove('opacity-0');
+                }, 600);
+            }
+            counterElement.textContent = count;
+        }, 50);
+    </script>
+</body>
+</html>
